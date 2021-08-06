@@ -6,7 +6,7 @@ This project created on 05/08/2021
 Explore US Bikeshare Data
 
 ### Description
-Describe what your project is about and what it does
+In this project, I used Python to explore and analysis data related to bike share systems for three major cities (Chicago, New York City, and Washington)
 
 ### Files used
 Include the files used
