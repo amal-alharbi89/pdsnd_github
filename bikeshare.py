@@ -8,7 +8,7 @@ import numpy as np
 CITY_DATA = {'chicago': 'chicago.csv',
               'new york': 'new_york_city.csv',
               'washington': 'washington.csv'}
-filter_months = ['january', 'february', 'march', 'april', 'may', 'june']
+MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -19,7 +19,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). 
+    # get user input for city (chicago, new york city, washington).
     city = input("Please enter Which city from (Chicago, New York, Washington) you would like to analyze: ").lower()
     while city not in CITY_DATA:
         city = input("Sorry we can not identify the city,Please enter one city from the following (Chicago, New York, Washington) to analyze: ").lower()
@@ -63,7 +63,7 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
 
-        month = filter_months.index(month) + 1
+        month = MONTHS.index(month) + 1
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -80,13 +80,13 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-    # if condition in case the user select specific month or day, there is no need to repeat the same month or day 
+    # if condition in case the user select specific month or day, there is no need to repeat the same month or day
     if month == 'all':
         # display the most common month
         common_month = df['month'].mode()[0]
         # display the count for most common month
         common_month_count = df['month'].value_counts().max()
-        print("For {} city, The most popular month of traveling is: {} / count: {}".format(city, filter_months[common_month - 1].title(), common_month_count))
+        print("For {} city, The most popular month of traveling is: {} / count: {}".format(city, MONTHS[common_month - 1].title(), common_month_count))
 
     if day == 'all':
         # display the most common day of week
@@ -132,7 +132,7 @@ def station_stats(df):
     # display count for most common trip
     journey_count = df['Start to End Station'].value_counts().max()
     print("For {} city, The most frequent journey is from: {} / count:{}".format(city, frequent_journey, journey_count))
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -145,10 +145,10 @@ def trip_duration_stats(df):
 
     # display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    
+
     # convert total travel time seconds to days,hours,minutes which will be more efficient and easy to read
     total_travel_hours = datetime.timedelta(seconds=int(total_travel_time))
-    
+
     # display the total travel time count
     total_travel_count = df['Trip Duration'].count()
     print("For {} city, The total hours of traveling is: {} (The total in Seconds is: {}) / count: {}".format(city, total_travel_hours,total_travel_time, total_travel_count))
@@ -170,8 +170,8 @@ def user_stats(df):
     start_time = time.time()
 
     # Display counts of user types
-    user_type_count = df['User Type'].value_counts()
-    print("For {} city, the user types are: \n{}".format(city, user_type_count))
+    user_type = df['User Type'].value_counts()
+    print("For {} city, the user types are: \n{}".format(city, user_type))
 
     # since the gender and birth year columns are not in washington.csv , use if to check the city is not washington
     if city != 'washington':
@@ -189,7 +189,7 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-def data_info(city):
+def raw_data(city):
 
     """
         Displays raw data upon user request
@@ -223,7 +223,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        data_info(city)
+        raw_data(city)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
