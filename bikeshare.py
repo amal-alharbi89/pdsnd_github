@@ -20,9 +20,9 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington).
-    city = input("Please enter Which city from (Chicago, New York, Washington) you would like to analyze: ").lower()
+    city = input("Please enter which city from (Chicago, New York, Washington) you would like to analyze: ").lower()
     while city not in CITY_DATA:
-        city = input("Sorry we can not identify the city,Please enter one city from the following (Chicago, New York, Washington) to analyze: ").lower()
+        city = input("Sorry we can not identify the city,Please enter one city from (Chicago, New York, Washington) to analyze: ").lower()
 
     #  get user input for month (all, january, february, ... , june)
     month = input("name a month ('January', 'February', 'March', 'April', 'May', 'June') to filter by  , or \"all\" to apply no month filter: ").lower()
@@ -130,7 +130,7 @@ def station_stats(df):
     frequent_journey = (df['Start Station'] + ' TO ' + df['End Station']).mode()[0]
     # display count for most common trip
     journey_count = (df['Start Station'] + ' TO ' + df['End Station']).value_counts().max()
-    print("For {} city, The most frequent journey is from: {} / count:{}".format(city, frequent_journey, journey_count))
+    print("For {} city, The most frequent trip is from: {} / count:{}".format(city, frequent_journey, journey_count))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -205,7 +205,7 @@ def raw_data(city):
 
     while user_response.lower() == 'yes':
         # added 4 because the rows starts from zero
-        print("The first 5 rows: \n {}".format(raw_data.loc[rows_number:rows_number+4]))
+        print("The first 5 rows are: \n {}".format(raw_data.loc[rows_number:rows_number+4]))
         user_response = input("Would like to explore the next 5 rows of US bikeshare data? ")
         rows_number += 5
 
@@ -224,7 +224,7 @@ def main():
         user_stats(df)
         raw_data(city)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Please Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
 
