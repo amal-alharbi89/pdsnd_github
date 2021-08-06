@@ -127,10 +127,9 @@ def station_stats(df):
 
 
     # create Start to End Station coulmns to display most frequent combination of start station and end station trip
-    df['Start to End Station'] = df['Start Station'] + ' TO ' + df['End Station']
-    frequent_journey = df['Start to End Station'].mode()[0]
+    frequent_journey = (df['Start Station'] + ' TO ' + df['End Station']).mode()[0]
     # display count for most common trip
-    journey_count = df['Start to End Station'].value_counts().max()
+    journey_count = (df['Start Station'] + ' TO ' + df['End Station']).value_counts().max()
     print("For {} city, The most frequent journey is from: {} / count:{}".format(city, frequent_journey, journey_count))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
