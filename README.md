@@ -17,3 +17,6 @@ I used three datasets:
 ### Credits
 - https://ehmatthes.github.io/pcc/cheatsheets/README.html
 - https://docs.python.org/3/tutorial/
+
+### Software used
+- PyCharm
